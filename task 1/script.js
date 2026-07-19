@@ -1,17 +1,45 @@
 const products = [
-  { id: 1, name: "The Salt Path", author: "", category: "English", price: 18, stock: true, img: "images/book1.jpg" },
-  { id: 2, name: "Midnight in the Garden", author: "", category: "English", price: 15, stock: true, img: "images/book2.jpg" },
-  { id: 3, name: "The Quiet Room", author: "", category: "English", price: 20, stock: true, img: "images/book3.jpg" },
-  { id: 4, name: "Atomic Habits", author: "James Clear", category: "Self-Help", price: 22, stock: true, img: "images/book4.jpg" },
-  { id: 5, name: "Raja Gidh", author: "Bano Qudsia", category: "Urdu", price: 15, stock: true, img: "images/book5.jpg" },
-  { id: 6, name: "Peer-e-Kamil", author: "Umera Ahmad", category: "Urdu", price: 16, stock: false, img: "images/book6.jpg" },
-  { id: 7, name: "Deep Work", author: "Cal Newport", category: "Self-Help", price: 24, stock: true, img: "images/book7.jpg" },
-  { id: 8, name: "Umrao Jaan Ada", author: "Mirza Hadi Ruswa", category: "Urdu", price: 17, stock: true, img: "images/book8.jpg" },
-  { id: 9, name: "Don't Be Sad", author: "Aaidh ibn Abdullah al-Qarni", category: "Islamic", price: 19, stock: true, img: "images/book9.jpg" },
-  { id: 10, name: "Wren and the Whale", author: "", category: "Children's", price: 12, stock: true, img: "images/book10.jpg" },
-  { id: 11, name: "The Paper Lantern", author: "", category: "Children's", price: 11, stock: true, img: "images/book11.jpg" },
-  { id: 12, name: "The Sealed Nectar", author: "Safiur Rahman Mubarakpuri", category: "Islamic", price: 21, stock: true, img: "images/book12.jpg" }
+  { id: 1, name: "The Salt Path", author: "Raynor Winn", category: "English", price: 18, stock: true, img: "images/book1.jpg", real: true },
+  { id: 2, name: "Midnight in the Garden", author: "", category: "English", price: 15, stock: true, img: "images/book2.jpg", real: false },
+  { id: 3, name: "The Quiet Room", author: "", category: "English", price: 20, stock: true, img: "images/book3.jpg", real: false },
+  { id: 4, name: "Atomic Habits", author: "James Clear", category: "Self-Help", price: 22, stock: true, img: "images/book4.jpg", real: true },
+  { id: 5, name: "Raja Gidh", author: "Bano Qudsia", category: "Urdu", price: 15, stock: true, img: "images/book5.jpg", real: true },
+  { id: 6, name: "Peer-e-Kamil", author: "Umera Ahmad", category: "Urdu", price: 16, stock: false, img: "images/book6.jpg", real: true },
+  { id: 7, name: "Deep Work", author: "Cal Newport", category: "Self-Help", price: 24, stock: true, img: "images/book7.jpg", real: true },
+  { id: 8, name: "Umrao Jaan Ada", author: "Mirza Hadi Ruswa", category: "Urdu", price: 17, stock: true, img: "images/book8.jpg", real: true },
+  { id: 9, name: "Don't Be Sad", author: "Aaidh ibn Abdullah al-Qarni", category: "Islamic", price: 19, stock: true, img: "images/book9.jpg", real: true },
+  { id: 10, name: "Wren and the Whale", author: "", category: "Children's", price: 12, stock: true, img: "images/book10.jpg", real: false },
+  { id: 11, name: "The Paper Lantern", author: "", category: "Children's", price: 11, stock: true, img: "images/book11.jpg", real: false },
+  { id: 12, name: "The Sealed Nectar", author: "Safiur Rahman Mubarakpuri", category: "Islamic", price: 21, stock: true, img: "images/book12.jpg", real: true }
 ];
+
+// Fetches real cover art for genuinely published books from Open Library's
+// free public cover API (no signup or API key needed). Falls back to the
+// local placeholder image in the "images" folder if no cover is found.
+async function loadRealCovers(){
+  const lookups = products.filter(p => p.real);
+  let anyUpdated = false;
+
+  for(const p of lookups){
+    try{
+      const query = encodeURIComponent(`${p.name} ${p.author}`.trim());
+      const res = await fetch(`https://openlibrary.org/search.json?q=${query}&limit=1`);
+      const data = await res.json();
+      const coverId = data.docs && data.docs[0] && data.docs[0].cover_i;
+      if(coverId){
+        p.img = `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+        anyUpdated = true;
+      }
+    } catch(err){
+      // Network issue or book not found in Open Library — local placeholder stays as-is
+    }
+  }
+
+  if(anyUpdated){
+    renderProducts();
+    renderCart();
+  }
+}
 
 let cart = JSON.parse(localStorage.getItem("inkwell-cart") || "[]");
 
@@ -239,12 +267,43 @@ document.querySelector(".checkout-btn").addEventListener("click", () => {
   showToast("Checkout is a UI demo — no payment is processed");
 });
 
+// ── Real email delivery via Formspree (free, no backend needed) ──────────
+// 1. Go to https://formspree.io and sign up free (2 minutes, no credit card)
+// 2. Create a new form, copy the endpoint it gives you (looks like
+//    "https://formspree.io/f/xxxxxxxx")
+// 3. Paste it below, replacing YOUR_FORM_ID in both endpoints
+// Until you do this, forms will show a friendly reminder instead of failing silently.
+const CONTACT_FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+const NEWSLETTER_FORM_ENDPOINT = "https://formspree.io/f/YOUR_FORM_ID";
+
+async function submitToFormspree(endpoint, formEl, successMessage){
+  if(endpoint.includes("YOUR_FORM_ID")){
+    showToast("Add your Formspree endpoint in script.js to send real emails");
+    formEl.reset();
+    return;
+  }
+  try{
+    const res = await fetch(endpoint, {
+      method: "POST",
+      headers: { "Accept": "application/json" },
+      body: new FormData(formEl)
+    });
+    if(res.ok){
+      showToast(successMessage);
+      formEl.reset();
+    } else {
+      showToast("Something went wrong — please try again");
+    }
+  } catch(err){
+    showToast("Network error — please try again");
+  }
+}
+
 const contactForm = document.getElementById("contactForm");
 if(contactForm){
   contactForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    showToast("Message sent — we'll reply within 24 hours");
-    contactForm.reset();
+    submitToFormspree(CONTACT_FORM_ENDPOINT, contactForm, "Message sent — we'll reply within 24 hours");
   });
 }
 
@@ -252,10 +311,10 @@ const newsletterForm = document.getElementById("newsletterForm");
 if(newsletterForm){
   newsletterForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    showToast("Subscribed — welcome to the reading club");
-    newsletterForm.reset();
+    submitToFormspree(NEWSLETTER_FORM_ENDPOINT, newsletterForm, "Subscribed — welcome to the reading club");
   });
 }
 
 renderProducts();
 renderCart();
+loadRealCovers();
