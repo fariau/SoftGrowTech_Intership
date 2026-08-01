@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nightlight Sessions — Book Your Night</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <a href="#top" class="brand">NIGHTLIGHT<span>SESSIONS</span></a>
+    <nav class="nav">
+      <a href="#events">Lineup</a>
+      <a href="#book">Book</a>
+      <a href="#faq">Info</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">Live events, real seats, no printer required</p>
+      <h1>Book your<br>next night out<br><em>before it sells out.</em></h1>
+      <p class="hero-sub">Pick a show from the current lineup, fill in one honest form, and walk out with a ticket stub that actually looks like one.</p>
+      <a href="#book" class="btn btn-primary">Start a booking ↓</a>
+    </div>
+
+    <div class="hero-ticket" aria-hidden="true">
+      <div class="ticket-mini">
+        <div class="ticket-mini-main">
+          <span class="tm-eyebrow">Admit One</span>
+          <span class="tm-title">Your Show Here</span>
+          <span class="tm-meta">SEC A · ROW 3 · SEAT 12</span>
+        </div>
+        <div class="ticket-mini-stub">
+          <span>NL</span>
+          <span>#0000</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EVENT LINEUP -->
+  <section id="events" class="events wrap">
+    <h2 class="section-heading"><span class="section-num">Lineup</span>Choose what you're walking into</h2>
+
+    <div class="event-grid">
+
+      <article class="event-card" data-event="riverside-jazz" data-price="35" data-date="2026-08-14">
+        <div class="event-card-top">
+          <span class="event-tag tag-jazz">Live Jazz</span>
+          <span class="event-date">Fri, Aug 14</span>
+        </div>
+        <h3>Riverside Jazz Quintet</h3>
+        <p>An unplugged set on the old pier stage. Doors open at dusk, first note at 8.</p>
+        <div class="event-card-bottom">
+          <span class="event-price">$35 / seat</span>
+          <button type="button" class="btn-pick" data-pick="riverside-jazz">Pick this show</button>
+        </div>
+      </article>
+
+      <article class="event-card" data-event="neon-basement" data-price="28" data-date="2026-08-21">
+        <div class="event-card-top">
+          <span class="event-tag tag-electronic">Electronic</span>
+          <span class="event-date">Fri, Aug 21</span>
+        </div>
+        <h3>Neon Basement Sessions</h3>
+        <p>Three local DJs, one low-ceilinged room, way too much bass. Standing room only.</p>
+        <div class="event-card-bottom">
+          <span class="event-price">$28 / entry</span>
+          <button type="button" class="btn-pick" data-pick="neon-basement">Pick this show</button>
+        </div>
+      </article>
+
+      <article class="event-card" data-event="paperback-poets" data-price="15" data-date="2026-08-28">
+        <div class="event-card-top">
+          <span class="event-tag tag-spokenword">Spoken Word</span>
+          <span class="event-date">Fri, Aug 28</span>
+        </div>
+        <h3>Paperback Poets Night</h3>
+        <p>Ten writers, five minutes each, one open mic slot if you're brave. Tea included.</p>
+        <div class="event-card-bottom">
+          <span class="event-price">$15 / seat</span>
+          <button type="button" class="btn-pick" data-pick="paperback-poets">Pick this show</button>
+        </div>
+      </article>
+
+      <article class="event-card" data-event="orchestra-under-stars" data-price="52" data-date="2026-09-05">
+        <div class="event-card-top">
+          <span class="event-tag tag-orchestra">Orchestra</span>
+          <span class="event-date">Sat, Sep 5</span>
+        </div>
+        <h3>Orchestra Under the Stars</h3>
+        <p>Full string section, open-air amphitheatre, bring a blanket for the grass seats.</p>
+        <div class="event-card-bottom">
+          <span class="event-price">$52 / seat</span>
+          <button type="button" class="btn-pick" data-pick="orchestra-under-stars">Pick this show</button>
+        </div>
+      </article>
+
+      <article class="event-card" data-event="stand-up-saturdays" data-price="22" data-date="2026-09-12">
+        <div class="event-card-top">
+          <span class="event-tag tag-comedy">Comedy</span>
+          <span class="event-date">Sat, Sep 12</span>
+        </div>
+        <h3>Stand-Up Saturdays</h3>
+        <p>Four comics, one mic, zero filter. Front row is at your own risk.</p>
+        <div class="event-card-bottom">
+          <span class="event-price">$22 / seat</span>
+          <button type="button" class="btn-pick" data-pick="stand-up-saturdays">Pick this show</button>
+        </div>
+      </article>
+
+      <article class="event-card" data-event="rooftop-cinema" data-price="18" data-date="2026-09-19">
+        <div class="event-card-top">
+          <span class="event-tag tag-film">Film</span>
+          <span class="event-date">Sat, Sep 19</span>
+        </div>
+        <h3>Rooftop Cinema Night</h3>
+        <p>A classic on the big inflatable screen, popcorn included, city skyline as the backdrop.</p>
+        <div class="event-card-bottom">
+          <span class="event-price">$18 / seat</span>
+          <button type="button" class="btn-pick" data-pick="rooftop-cinema">Pick this show</button>
+        </div>
+      </article>
+
+      <article class="event-card" data-event="salsa-workshop" data-price="25" data-date="2026-09-26">
+        <div class="event-card-top">
+          <span class="event-tag tag-dance">Workshop</span>
+          <span class="event-date">Sat, Sep 26</span>
+        </div>
+        <h3>Salsa Floor Workshop</h3>
+        <p>Two hours, one instructor, no partner required. Wear shoes you can actually turn in.</p>
+        <div class="event-card-bottom">
+          <span class="event-price">$25 / person</span>
+          <button type="button" class="btn-pick" data-pick="salsa-workshop">Pick this show</button>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- BOOKING FORM -->
+  <section id="book" class="booking wrap">
+    <h2 class="section-heading"><span class="section-num">Book</span>Fill in the stub</h2>
+
+    <div class="ticket-form-shell">
+      <form id="booking-form" novalidate>
+
+        <div class="ticket-form-main">
+
+          <p class="form-lede">Admit One — details go on record, not on display. We only use this to hold your seat.</p>
+
+          <div class="field">
+            <label for="fullName">Full name</label>
+            <input type="text" id="fullName" name="fullName" placeholder="As it should appear at the door" autocomplete="name">
+            <span class="error-msg" id="err-fullName"></span>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="email">Email</label>
+              <input type="email" id="email" name="email" placeholder="you@example.com" autocomplete="email">
+              <span class="error-msg" id="err-email"></span>
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone" placeholder="03XX XXXXXXX" autocomplete="tel">
+              <span class="error-msg" id="err-phone"></span>
+            </div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="eventSelect">Show</label>
+              <select id="eventSelect" name="eventSelect">
+                <option value="">Select a show</option>
+                <option value="riverside-jazz">Riverside Jazz Quintet — Aug 14</option>
+                <option value="neon-basement">Neon Basement Sessions — Aug 21</option>
+                <option value="paperback-poets">Paperback Poets Night — Aug 28</option>
+                <option value="orchestra-under-stars">Orchestra Under the Stars — Sep 5</option>
+                <option value="stand-up-saturdays">Stand-Up Saturdays — Sep 12</option>
+                <option value="rooftop-cinema">Rooftop Cinema Night — Sep 19</option>
+                <option value="salsa-workshop">Salsa Floor Workshop — Sep 26</option>
+              </select>
+              <span class="error-msg" id="err-eventSelect"></span>
+            </div>
+            <div class="field">
+              <label for="ticketCount">Tickets</label>
+              <input type="number" id="ticketCount" name="ticketCount" min="1" max="8" value="1">
+              <span class="error-msg" id="err-ticketCount"></span>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="notes">Anything we should know? <span class="optional">(optional)</span></label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Wheelchair access, aisle seat, allergic to glitter, etc."></textarea>
+          </div>
+
+          <div class="field field-checkbox">
+            <input type="checkbox" id="terms" name="terms">
+            <label for="terms">I understand tickets are non-refundable but transferable to a friend</label>
+            <span class="error-msg" id="err-terms"></span>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-submit">Confirm booking</button>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+
+        </div>
+
+        <div class="ticket-form-stub">
+          <span class="stub-label">Your Total</span>
+          <span class="stub-total" id="stub-total">$0</span>
+          <span class="stub-divider"></span>
+          <span class="stub-label">Show</span>
+          <span class="stub-show" id="stub-show">— not chosen —</span>
+          <span class="stub-divider"></span>
+          <span class="stub-label">Qty</span>
+          <span class="stub-qty" id="stub-qty">1</span>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Confirmation ticket, hidden until successful submit -->
+    <div class="confirmation" id="confirmation" hidden>
+      <div class="real-ticket">
+        <div class="stamp" id="stamp">CONFIRMED</div>
+        <div class="real-ticket-main">
+          <span class="rt-eyebrow">Admit One — Nightlight Sessions</span>
+          <h3 id="rt-title">—</h3>
+          <div class="rt-grid">
+            <div><span>Name</span><strong id="rt-name">—</strong></div>
+            <div><span>Date</span><strong id="rt-date">—</strong></div>
+            <div><span>Tickets</span><strong id="rt-qty">—</strong></div>
+            <div><span>Total</span><strong id="rt-total">—</strong></div>
+          </div>
+        </div>
+        <div class="real-ticket-stub">
+          <span class="rts-code" id="rt-code">NL-000000</span>
+          <span class="rts-small">Show this at the door</span>
+        </div>
+      </div>
+      <button type="button" class="btn btn-ghost" id="book-another">Book another</button>
+    </div>
+
+  </section>
+
+  <section id="faq" class="faq wrap">
+    <h2 class="section-heading"><span class="section-num">Info</span>Before you knock</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h4>Can I change my show after booking?</h4>
+        <p>Email us within 48 hours and we'll move you to another date, seats allowing.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Is there an age limit?</h4>
+        <p>Jazz and orchestra nights are all ages. Basement sessions run 18+ after 10pm.</p>
+      </div>
+      <div class="faq-item">
+        <h4>What if I lose my ticket code?</h4>
+        <p>Your name and the code we emailed you both get you through the door.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <span>NIGHTLIGHT SESSIONS</span>
+    <span>Small rooms, loud nights.</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
